@@ -61,3 +61,116 @@ This project provides a complete solution for managing test scores. It allows us
 ---
 
 ## Project Structure
+topscorers_quarkus/
+├── src/
+│ └── main/
+│ ├── java/
+│ │ └── org/
+│ │ └── ninetyone/
+│ │ ├── model/
+│ │ │ ├── Person.java
+│ │ │ ├── PersonEntity.java
+│ │ │ ├── ScoreRequest.java
+│ │ │ ├── ScoreResponse.java
+│ │ │ └── TopScorersResponse.java
+│ │ ├── repository/
+│ │ │ └── PersonRepository.java
+│ │ ├── resource/
+│ │ │ ├── TopScorersResource.java
+│ │ │ └── ScoreResource.java
+│ │ ├── service/
+│ │ │ ├── CSVProcessorService.java
+│ │ │ └── ScoreService.java
+│ │ └── TopScorersApplication.java
+│ └── resources/
+│ └── application.properties
+├── TestData.csv
+├── pom.xml
+└── README.md
+
+
+---
+
+## Features
+
+### Core Functionality
+- **CSV Upload**: Upload CSV files with test scores
+- **Score Management**: Add and update individual scores via REST API
+- **Score Retrieval**: Get scores for specific persons
+- **Top Scorers**: Retrieve highest score(s) with alphabetical ordering for ties
+
+### Database Features
+- Automatic table creation on startup
+- H2 in-memory database for local development
+- Full CRUD operations via JPA
+- Transaction management
+
+### API Features
+- RESTful endpoints with JSON responses
+- Input validation
+- Proper HTTP status codes
+- Error handling with meaningful messages
+- CORS support for frontend integration
+
+---
+
+## API Endpoints
+
+### Score Management
+
+| Method | Endpoint | Description | Request Body | Response |
+|--------|----------|-------------|--------------|----------|
+| `POST` | `/api/scores` | Add a new score | `{"firstName":"John","lastName":"Doe","score":85}` | `{"fullName":"John Doe","score":85,"message":"Score added successfully"}` |
+| `GET` | `/api/scores/person?fullName=John%20Doe` | Get score by full name | - | `{"fullName":"John Doe","score":85}` |
+| `GET` | `/api/scores/person?firstName=John&lastName=Doe` | Get score by first/last name | - | `{"fullName":"John Doe","score":85}` |
+| `GET` | `/api/scores/top` | Get top scorer(s) | - | `{"topScore":92,"topScorers":["Jane Smith"],"totalEntries":5}` |
+
+### CSV Upload
+
+| Method | Endpoint | Description | Request Body | Response |
+|--------|----------|-------------|--------------|----------|
+| `POST` | `/api/topscorers/upload` | Upload CSV file | Multipart form with file | `{"topScore":78,"topScorers":["George Of The Jungle","Sipho Lolo"],"totalEntries":4}` |
+| `POST` | `/api/topscorers/process-file` | Process CSV by file path | `"C:/path/to/file.csv"` | Same as above |
+
+### Database Queries
+
+| Method | Endpoint | Description | Response |
+|--------|----------|-------------|----------|
+| `GET` | `/api/topscorers/all` | Get all persons | `[{"id":1,"firstName":"John","lastName":"Doe","fullName":"John Doe","score":85}]` |
+| `GET` | `/api/topscorers/database/top` | Get top scorers from DB | `{"topScore":92,"topScorers":["Jane Smith"],"totalEntries":5}` |
+| `GET` | `/api/topscorers/database/count` | Get total count | `{"count":5}` |
+| `DELETE` | `/api/topscorers/database/clear` | Clear all data | `{"message":"Database cleared successfully"}` |
+| `GET` | `/api/topscorers/sample` | Sample response for testing | `{"topScore":78,"topScorers":["George Of The Jungle Sipho","Lolo"],"totalEntries":5}` |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Java 17 or 21** (Java 17 LTS recommended)
+- **Maven 3.9.0+** (or use the included Maven wrapper)
+- **Git** (optional)
+
+### Installation
+
+# Clone the repository
+git clone https://github.com/yourusername/topscorers-api.git
+cd topscorers-api
+
+# Verify Java version
+java -version
+# Should show Java 17 or 21
+
+# Build the project
+./mvnw clean compile
+
+Running the Application
+Mode	Command
+Development (Hot Reload)	./mvnw quarkus:dev
+Production (JVM)	./mvnw clean package
+java -jar target/quarkus-app/quarkus-run.jar
+Native (GraalVM)	./mvnw package -Pnative
+./target/code-with-quarkus-1.0.0-SNAPSHOT-runner
+The application will start on: http://localhost:8080
+
