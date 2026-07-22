@@ -155,22 +155,21 @@ topscorers_quarkus/
 ### Installation
 
 # Clone the repository
-git clone https://github.com/yourusername/topscorers-api.git
+git clone https://github.com/ebiecas02/topscorers_quarkus.git
 cd topscorers-api
 
-# Verify Java version
+Verify Java version
 java -version
-# Should show Java 17 or 21
+Should show Java 17 or 21
 
 # Build the project
 ./mvnw clean compile
 
 # Running the Application
-Mode	| Command
-Development (Hot Reload)	./mvnw quarkus:dev
 
-Production (JVM)	./mvnw clean package
-java -jar target/quarkus-app/quarkus-run.jar
+Development Mode with (Hot Reload)	
+
+./mvnw quarkus:dev
 
 The application will start on: http://localhost:8080
 
