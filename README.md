@@ -166,3 +166,28 @@ Development Mode with (Hot Reload)
 
 The application will start on: http://localhost:8080
 
+## Testing the API
+
+PowerShell Commands
+
+# 1. Add a New Score
+Invoke-RestMethod -Uri "http://localhost:8080/api/scores" -Method Post -Body (@{firstName="John";lastName="Doe";score=85} | ConvertTo-Json) -ContentType "application/json"
+
+# 2. Get Score by Full Name
+Invoke-RestMethod -Uri "http://localhost:8080/api/scores/person?fullName=John%20Doe" -Method Get
+
+# 3. Get Score by First and Last Name
+Invoke-RestMethod -Uri "http://localhost:8080/api/scores/person?firstName=John&lastName=Doe" -Method Get
+
+# 4. Get Top Scorers
+Invoke-RestMethod -Uri "http://localhost:8080/api/scores/top" -Method Get
+
+# 5. Upload Provided CSV Sample File
+curl.exe -X POST -F "fileData=@C:\path\to\TestData.csv" -F "fileName=TestData.csv" http://localhost:8080/api/topscorers/upload
+
+# 6. Get All Persons
+Invoke-RestMethod -Uri "http://localhost:8080/api/topscorers/all" -Method Get
+
+# 7. Clear Database
+Invoke-RestMethod -Uri "http://localhost:8080/api/topscorers/database/clear" -Method Delete
+
