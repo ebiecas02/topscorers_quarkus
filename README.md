@@ -165,12 +165,12 @@ java -version
 # Build the project
 ./mvnw clean compile
 
-Running the Application
-Mode	Command
-Development (Hot Reload)	./mvnw quarkus:dev
-Production (JVM)	./mvnw clean package
+# Running the Application
+Mode	| Command
+## Development (Hot Reload)	./mvnw quarkus:dev
+
+## Production (JVM)	./mvnw clean package
 java -jar target/quarkus-app/quarkus-run.jar
-Native (GraalVM)	./mvnw package -Pnative
-./target/code-with-quarkus-1.0.0-SNAPSHOT-runner
+
 The application will start on: http://localhost:8080
 
