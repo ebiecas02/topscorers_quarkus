@@ -167,9 +167,9 @@ java -version
 
 # Running the Application
 Mode	| Command
-## Development (Hot Reload)	./mvnw quarkus:dev
+Development (Hot Reload)	./mvnw quarkus:dev
 
-## Production (JVM)	./mvnw clean package
+Production (JVM)	./mvnw clean package
 java -jar target/quarkus-app/quarkus-run.jar
 
 The application will start on: http://localhost:8080
