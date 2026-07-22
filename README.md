@@ -88,7 +88,6 @@ The application was built as a solution to a programming assignment and demonstr
 ├── pom.xml
 └── README.md
 
-text
 
 ## Features
 
