@@ -17,13 +17,6 @@ A RESTful API built with Quarkus that manages test scores, stores them in a data
 - [API Endpoints](#api-endpoints)
 - [Getting Started](#getting-started)
 - [Testing the API](#testing-the-api)
-- [Database](#database)
-- [CSV File Format](#csv-file-format)
-- [Error Handling](#error-handling)
-- [Technical Implementation](#technical-implementation)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
